@@ -1,0 +1,91 @@
+﻿<Window x:Class="FileManager2.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:FileManager2.ViewModel"
+        Title="Файловый менеджер" Height="600" Width="800"
+        Name="mainWindow"
+        Icon="/FileManager2;component/Images/icon_small.png">
+    <Window.InputBindings>
+        <KeyBinding Key="BackSpace" Command="{Binding Path=BackCommand}" />
+    </Window.InputBindings>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFC3C4C7" Offset="0" />
+            <GradientStop Color="White" Offset="0.05" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <DataTemplate x:Key="ListViewItemTemplate" DataType="{x:Type c:DirectoryObject}">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding Path=GoSubCommand}" />
+                    <KeyBinding Key="Enter" Command="{Binding Path=GoSubCommand}" /> <!-- Doesn't work, wtf? -->
+                </StackPanel.InputBindings>
+                <Image Name="ObjectType" Width="16" Height="16" Source="/FileManager2;component/Images/icon_file.png" />
+                <Label Content="{Binding Name}" />
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Type}" Value="Directory">
+                    <Setter TargetName="ObjectType" Property="Source" Value="/FileManager2;component/Images/icon_dir.png" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Menu IsMainMenu="True" Background="{x:Null}">
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Информация о диске" Command="{Binding Path=InfoCommand}" />
+                <Separator />
+                <MenuItem Header="_Выход" Command="{Binding Path=CloseCommand}" CommandParameter="{Binding ElementName=mainWindow}" />
+            </MenuItem>
+            <MenuItem Header="_Помощь">
+                <MenuItem Header="_О программе" Command="{Binding Path=AboutCommand}" />
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Column="0" Grid.Row="1" Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Margin="0, 0, 0, 12">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button   Grid.Row="0" Grid.Column="0" 
+                          Name="BackButton" Content="&lt;&lt;"
+                          Background="{x:Null}" BorderBrush="#FF348DFF" Command="{Binding Path=BackCommand}" />
+                <ComboBox Grid.Row="0" Grid.Column="1" Name="DiskCombo" Margin="12, 0, 12, 0"
+                          ItemsSource="{Binding DiskLetters}" 
+                          SelectedItem="{Binding CurrentDiskLetter}" Background="{x:Null}" BorderBrush="#FF348DFF" />
+
+                <Label Grid.Row="0" Grid.Column="2" Name="AddressBar" 
+                       Content="{Binding CurrentPath}" Padding="3" VerticalContentAlignment="Center" BorderBrush="#FF348DFF" BorderThickness="1" />
+
+            </Grid>
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="#FF348DFF" BorderThickness="1">
+                <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ListView Name="listView"
+                              ItemTemplate="{StaticResource ListViewItemTemplate}"
+                              ItemsSource="{Binding DirectoryObjects}"
+                              BorderThickness="0" Padding="5">
+                    </ListView>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

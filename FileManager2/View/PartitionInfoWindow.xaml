@@ -1,0 +1,48 @@
+﻿<Window x:Class="FileManager2.View.PartitionInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DiskInfoWindow" Height="300" Width="300">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFC3C4C7" Offset="0" />
+            <GradientStop Color="White" Offset="0.05" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Disk is active:" />
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Disk is extended:" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Disk letter:" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Disk file system:" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="HDD number:" />
+        <TextBlock Grid.Column="0" Grid.Row="5" Text="Start address:" />
+        <TextBlock Grid.Column="0" Grid.Row="6" Text="Size:" />
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Free space:" />
+        <TextBlock Grid.Column="0" Grid.Row="8" Text="Serial number:" />
+
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Active}" />
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Extended}" />
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Letter}" />
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding FileSystem}" />
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding HddNumber}" />
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Address}" />
+        <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding StringSize}" />
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding StringFreeSpace}" />
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding StringSerialNumber}" />
+    </Grid>
+</Window>

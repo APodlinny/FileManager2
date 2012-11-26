@@ -1,0 +1,24 @@
+﻿<Window x:Class="FileManager2.View.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="О программе" Height="191" Width="483" ResizeMode="NoResize">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFC3C4C7" Offset="0" />
+            <GradientStop Color="White" Offset="0.16" />
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="/FileManager2;component/Images/donnto_logo.png" Width="128" Height="128" />
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="5, 10, 0, 0">
+                <Label Content="Файловый менеджер. Курсовой по дисциплине СПО." />
+                <Label Content="ДонНТУ" />
+                <Label Content="Студент группы ХХ-ХХх" />
+                <Label Content="Surname Name" />
+            </StackPanel>
+        </Grid>
+</Window>
